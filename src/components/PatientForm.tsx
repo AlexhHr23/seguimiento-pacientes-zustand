@@ -8,6 +8,7 @@ export const PatientForm = () => {
     //Declaraciones de los métodos de la store
     // const {AddPatient} = usePatientStore()
     const AddPatient = usePatientStore(state => state.AddPatient)
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm<DraftPatient>()
 
     const registerPatient = (data: DraftPatient) => {
