@@ -1,12 +1,17 @@
 import { useForm } from 'react-hook-form'
 import { Error } from '../components/Error'
+import type { DraftPatient } from '../types'
+import { usePatientStore } from '../stores/store'
 
 export const PatientForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    //Declaraciones de los métodos de la store
+    // const {AddPatient} = usePatientStore()
+    const AddPatient = usePatientStore(state => state.AddPatient)
+    const { register, handleSubmit, formState: { errors } } = useForm<DraftPatient>()
 
-    const registerPatient = () => {
-        console.log('Nuevo paciente');
+    const registerPatient = (data: DraftPatient) => {
+        AddPatient(data)
     }
 
     return (
@@ -38,7 +43,7 @@ export const PatientForm = () => {
                     />
                     {errors.name && (
                         <Error>
-                            {errors.name?.message?.toString()}
+                            {errors.name?.message}
                         </Error>
                     )}
 
@@ -59,7 +64,7 @@ export const PatientForm = () => {
                     />
                     {errors.caretaker && (
                         <Error>
-                            {errors.caretaker?.message?.toString()}
+                            {errors.caretaker?.message}
                         </Error>
                     )}
                 </div>
@@ -83,7 +88,7 @@ export const PatientForm = () => {
                     />
                     {errors.email && (
                         <Error>
-                            {errors.email?.message?.toString()}
+                            {errors.email?.message}
                         </Error>
                     )}
                 </div>
@@ -102,7 +107,7 @@ export const PatientForm = () => {
                     />
                     {errors.date && (
                         <Error>
-                            {errors.date?.message?.toString()}
+                            {errors.date?.message}
                         </Error>
                     )}
                 </div>
@@ -122,7 +127,7 @@ export const PatientForm = () => {
                     </textarea>
                     {errors.symptoms && (
                         <Error>
-                            {errors.symptoms?.message?.toString()}
+                            {errors.symptoms?.message}
                         </Error>
                     )}
                 </div>
