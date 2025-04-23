@@ -11,6 +11,7 @@ export const PatientForm = () => {
     const AddPatient = usePatientStore(state => state.AddPatient)
     const activeId = usePatientStore(state => state.activeId)
     const patients = usePatientStore(state => state.patients)
+    const updatePatient = usePatientStore(state => state.updatePatient)
 
     const { register, handleSubmit, setValue,  formState: { errors }, reset } = useForm<DraftPatient>()
 
@@ -27,7 +28,12 @@ export const PatientForm = () => {
     }, [activeId])
 
     const registerPatient = (data: DraftPatient) => {
-        AddPatient(data)
+        if(activeId) {
+            updatePatient(data)
+        } else {
+            AddPatient(data)
+        }
+        
         reset()
     }
    
